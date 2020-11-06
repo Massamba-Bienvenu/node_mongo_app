@@ -1,0 +1,2 @@
+Welcome!
+I worked on this app mainly for two reasons. First by writting code to run this app am showcasing my node and mongoDb development and integrations skills. secondly but not he least I am sohwoing here my ability to work on git.
