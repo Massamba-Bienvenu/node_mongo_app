@@ -1,5 +1,5 @@
 const express = require("express");
-const errorController = require("../controllers/error.js");
+const errorController = require("../controllers/404.js");
 const router = express.Router();
 
 
