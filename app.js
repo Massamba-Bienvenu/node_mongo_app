@@ -1,31 +1,24 @@
-const http = require("http");
-const fs = require("fs");
+const path =  require("path");
 
+const express = require("express");
+const bodyParser = require("body-parser");
 
-const server = http.createServer((req, res)=> {
-    const url = req.url;
-    const method =  req.method;
-    if (url === "/") {
-        res.setHeader("Content-type", "text/html");
-        res.write("<html>");
-        res.write("<head><title>Enter Message</title></head>");
-        res.write('<body><form action="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></input></form></body>');
-        res.write("</html>");
-        return res.end();
-    };
+const adminData = require("./routes/admin.js");
+const shopRoutes = require("./routes/shop.js");
+const errorRoutes = require("./routes/404.js");
 
-    if (url === "/message" && method === "POST") {
-        fs.writeFileSync("message.text", "DUMMY");
-        res.statusCode = 302;
-        res.setHeader("Location", "/");
-        return res.end();
-    };
-    
-    res.write("<html>");
-    res.write("<head><title>My First Page</title></head>");
-    res.write(`<body><h1>Hello from Node.js!!!!</h1></body>`);
-    res.write("</html>");
-    res.end();
-});
+//Setup
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-server.listen(5000);
+//Middlewares defintion
+app.use('/admin', adminData.routes);
+app.use(shopRoutes);
+
+//404 Catch-all page
+app.use(errorRoutes )
+
+app.listen(3000);
