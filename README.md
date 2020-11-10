@@ -11,3 +11,5 @@ Node.js technologies used:
     -serveing files through:
         -senfFiles  such as html
         -express.static to serve files statically (managing external css avail in express.js)
+    
+    I used the MVC(Model, view and controllers) to organize the application's functionalities.
